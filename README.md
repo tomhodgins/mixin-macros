@@ -46,7 +46,7 @@ module.exports = () => {
 }
 ```
 
-For a larger example of an expression that can be evaluated, look at `[demo.sexp](examples/demo.sexp)`:
+For a larger example of an expression that can be evaluated, look at [demo.sexp](examples/demo.sexp):
 
 ```js
 mixin('demo', ['selector', 'string', 'rule'],
