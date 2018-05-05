@@ -3,5 +3,5 @@ mixin('demo', ['selector', 'string', 'rule'],
     filterFunc('tag.textContent.includes(string)',
       reduceFunc(
         createAttribute(['selector', 'string'],
-          addAttribute('tag', 'text',
-            addRule('', '', 'text')))))))
+          addAttribute('tag', 'demo',
+            addRule('', '', 'demo')))))))
