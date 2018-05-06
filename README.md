@@ -54,8 +54,8 @@ mixin('demo', ['selector', 'string', 'rule'],
     filterFunc('tag.textContent.includes(string)',
       reduceFunc(
         createAttribute(['selector', 'string'],
-          addAttribute('tag', 'text',
-            addRule('', '', 'text')))))))
+          addAttribute('tag', 'demo',
+            addRule('', '', 'demo')))))))
 ```
 
 Which makes use of a few macros included in this library like `returnValue()` and `filterFunc` and more, and when evaluated turns into:
@@ -71,8 +71,8 @@ function demo(selector, string, rule) {
 
       const attr = (selector + string).replace(/\W/g, '')
 
-      tag.setAttribute(`data-text-${attr}`, count)
-      styles += `[data-text-${attr}="${count}"] { ${rule} }\n`
+      tag.setAttribute(`data-demo-${attr}`, count)
+      styles += `[data-demo-${attr}="${count}"] { ${rule} }\n`
       count++
 
       return styles
