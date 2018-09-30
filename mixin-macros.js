@@ -20,14 +20,8 @@ function filterFunc(func='', rhs='') {
 function plainReduce(rhs='') {
 
   return '    .reduce((styles, tag, count) => {\n\n'
-         + rhs + '\n'
-         + '    }, \'\')\n\n'
-
-}
-
-function count(rhs='') {
-
-  return `      count++\n${rhs}`
+  + rhs + '\n'
+  + '    }, \'\')\n\n'
 
 }
 
@@ -40,10 +34,9 @@ function returnStyles(rhs='') {
 function reduceFunc(rhs='') {
 
   return plainReduce(
-           rhs
-           + count() + '\n'
-           + returnStyles()
-         )
+    rhs
+    + returnStyles()
+  )
 
 }
 
@@ -74,47 +67,46 @@ function plainRule(selector='', rule='', rhs='') {
 function addRule(before='', after='', plugin='', rule='${rule}', rhs='') {
 
   return plainRule(
-           `${before}[data-${plugin}-$\{attr}="$\{count}"]${after}`,
-           rule
-          ) + rhs
+    `${before}[data-${plugin}-$\{attr}="$\{count}"]${after}`,
+    rule
+  ) + rhs
 
 }
 
 function addStylesheet(stylesheet='', plugin='', rhs='') {
 
   return `      styles += ${stylesheet}.replace(\n`
-         + '        /:self|\\$this/g,\n'
-         + `        \`[data-${plugin}-$\{attr}="$\{count}"]\`\n`
-         + `      )\n${rhs}`
+  + '        /:self|\\$this/g,\n'
+  + `        \`[data-${plugin}-$\{attr}="$\{count}"]\`\n`
+  + `      )\n${rhs}`
 
 }
 
 function ifElseReturn(statement='', attributes=[], tag='', plugin='', rhs='') {
 
   return `  if (${statement}) {\n\n`
-         + createAttribute(attributes).substring(2)
-         + `    ${tag}.setAttribute(\`data-${plugin}-$\{attr}\`, '')\n\n`
-         + `    return \`$\{selector}[data-${plugin}-$\{attr}] { $\{rule} }\\n\`\n\n`
-         + '  } else {\n\n'
-         + '    return \'\'\n\n'
-         + `  }\n\n${rhs}`
+  + createAttribute(attributes).substring(2)
+  + `    ${tag}.setAttribute(\`data-${plugin}-$\{attr}\`, '')\n\n`
+  + `    return \`$\{selector}[data-${plugin}-$\{attr}] { $\{rule} }\\n\`\n\n`
+  + '  } else {\n\n'
+  + '    return \'\'\n\n'
+  + `  }\n\n${rhs}`
 
 }
 
 function ifElseReset(statement='', tag='tag', plugin='', stylesheet='stylesheet', rhs='') {
 
   return `      if (${statement}) {\n\n`
-         + '  ' + addAttribute(tag, plugin)
-         + addStylesheet(stylesheet, plugin)
-                    .replace(/^/, '  ')
-                    .replace(/\n/g, '\n  ')
-         + '  ' + count().substring(2)
-         + '\n'
-         + '      } else {\n\n'
-         + '  ' + resetAttribute(tag, plugin)
-         + '\n'
-         + '      }\n\n'
-         + returnStyles() + rhs
+  + '  ' + addAttribute(tag, plugin)
+  + addStylesheet(stylesheet, plugin)
+            .replace(/^/, '  ')
+            .replace(/\n/g, '\n  ')
+  + '\n'
+  + '      } else {\n\n'
+  + '  ' + resetAttribute(tag, plugin)
+  + '\n'
+  + '      }\n\n'
+  + returnStyles() + rhs
 
 }
 
@@ -130,20 +122,20 @@ if (process.argv[2]) {
       case 'vanilla':
 
         return `export default (${args.join(', ')}) => {\n\n`
-               + rhs
-               + '}'
+        + rhs
+        + '}'
 
       case 'named':
 
         return `function ${name}(${args.join(', ')}) {\n\n`
-               + rhs
-               + '}'
+        + rhs
+        + '}'
 
       case 'cjs':
 
         return `module.exports = (${args.join(', ')}) => {\n\n`
-               + rhs
-               + '}'
+        + rhs
+        + '}'
 
     }
 
