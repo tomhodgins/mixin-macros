@@ -76,7 +76,7 @@ function addRule(before='', after='', plugin='', rule='${rule}', rhs='') {
 function addStylesheet(stylesheet='', plugin='', rhs='') {
 
   return `      styles += ${stylesheet}.replace(\n`
-  + '        /:self|\\$this/g,\n'
+  + '        /:self|\\$this|\\[--self\\]/g,\n'
   + `        \`[data-${plugin}-$\{attr}="$\{count}"]\`\n`
   + `      )\n${rhs}`
 
